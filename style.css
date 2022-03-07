@@ -1,0 +1,28 @@
+header h1 {
+  text-align: center;
+}
+.map-wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 500px;
+  margin: 10px;
+}
+.map {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+}
+.red-postbox {
+  margin-left: 10px;
+}
+.red-postbox__button {
+  border: 0;
+  background-color: red;
+  color: white;
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 140px;
+}
+.red-postbox__info {
+  padding: 10px 0;
+}
