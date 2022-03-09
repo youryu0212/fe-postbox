@@ -1,4 +1,5 @@
 import { getElementsByClassName, getElementByClassName } from ".././dom-api/index.js";
+import { mergeSort } from "../util.js";
 
 const searchRedPostbox = () => {
   const villagesHasRedPostbox = getElementsByClassName(document, "has-red-postbox");
@@ -19,8 +20,8 @@ redPostboxButton.addEventListener("click", () => {
   const postboxSize = villages.map((village) => [getVillageName(village), getRedPostboxSize(village)]);
   const redPostboxInfo = getElementByClassName(document, "red-postbox__info");
   redPostboxInfo.innerHTML = `
-  <div>${postboxSize.map(([villageName, _]) => villageName)} 총 ${postboxSize.length} 개의 마을입니다.</div>
-  <div>크기는 차례대로 ${postboxSize.map(([_, postboxSize]) => postboxSize)}입니다.</div>
+  <div>${postboxSize.map(([name, _]) => name)} 총 ${postboxSize.length} 개의 마을입니다.</div>
+  <div>우체통의 크기는${mergeSort(postboxSize, (a, b) => a[1] >= b[1]).map(([name, _]) => name)}입니다.</div>
   `;
 });
 
