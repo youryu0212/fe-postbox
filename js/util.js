@@ -1,5 +1,5 @@
 const mergeSort = (arr, callback = null) => {
-  if (arr.length === 1) return arr;
+  if (arr.length <= 1) return arr;
   const mid = Math.floor(arr.length / 2);
   const left = mergeSort(arr.slice(0, mid), callback);
   const right = mergeSort(arr.slice(mid), callback);
