@@ -1,5 +1,5 @@
 import { getElementsByClassName, getElementByClassName } from ".././dom-api/index.js";
-import { mergeSort } from "../util.js";
+import { mergeSort, delay } from "../util.js";
 
 const searchVillagesRedPostbox = () => getElementsByClassName(document, "has-red-postbox");
 const getVillageName = (village) => getElementByClassName(village, "village-name").innerText;
@@ -29,13 +29,15 @@ redPostboxButton.addEventListener("click", () => {
       return { name: getVillageName(villageElement), postboxSize: getRedPostboxSize(villageElement) };
     });
     renderRedPostboxInfo(villagesHasRedPostbox);
-    setTimeout(() => resolve(villageHasRedPostboxElements), 2000);
-  }).then((villageHasRedPostboxElements) => {
-    villageHasRedPostboxElements.forEach((village) => {
-      const villageArea = getElementByClassName(village, "village-area");
-      villageArea.style.borderColor = "red";
+    resolve(villageHasRedPostboxElements);
+  })
+    .then((villageHasRedPostboxElements) => delay(villageHasRedPostboxElements, 2000))
+    .then((villageHasRedPostboxElements) => {
+      villageHasRedPostboxElements.forEach((village) => {
+        const villageArea = getElementByClassName(village, "village-area");
+        villageArea.style.borderColor = "red";
+      });
     });
-  });
 });
 
 export { redPostboxButton };
