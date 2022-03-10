@@ -32,5 +32,6 @@ const delay = (data, time) => {
 };
 
 const getRandomNumber = (start, end) => Math.floor(Math.random() * (end - start) + start);
+const toInt = (number) => Math.floor(number);
 
-export { mergeSort, delay, getRandomNumber };
+export { mergeSort, delay, getRandomNumber, toInt };
