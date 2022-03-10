@@ -7,8 +7,12 @@ const getRedPostboxSize = (village) => Number(getElementByClassName(village, "re
 
 const redPostboxButton = getElementByClassName(document, "red-postbox__button");
 
-const renderRedPostboxInfo = (villagesHasRedPostbox) => {
+const renderRedPostboxInfo = (villageHasRedPostboxElements) => {
+  const villagesHasRedPostbox = villageHasRedPostboxElements.map((villageElement) => {
+    return { name: getVillageName(villageElement), postboxSize: getRedPostboxSize(villageElement) };
+  });
   const redPostboxInfo = getElementByClassName(document, "red-postbox__info");
+
   redPostboxInfo.innerHTML = `
   <div>
     ${villagesHasRedPostbox.map((village) => village.name)} 총 ${
@@ -22,22 +26,22 @@ const renderRedPostboxInfo = (villagesHasRedPostbox) => {
   </div>
   `;
 };
+
+const changeVillageAreaColor = (villageElements, color) => {
+  villageElements.forEach((village) => {
+    const villageArea = getElementByClassName(village, "village-area");
+    villageArea.style.borderColor = color;
+  });
+};
+
 redPostboxButton.addEventListener("click", () => {
   new Promise((resolve, reject) => {
     const villageHasRedPostboxElements = searchVillagesRedPostbox();
-    const villagesHasRedPostbox = villageHasRedPostboxElements.map((villageElement) => {
-      return { name: getVillageName(villageElement), postboxSize: getRedPostboxSize(villageElement) };
-    });
-    renderRedPostboxInfo(villagesHasRedPostbox);
+    renderRedPostboxInfo(villageHasRedPostboxElements);
     resolve(villageHasRedPostboxElements);
   })
     .then((villageHasRedPostboxElements) => delay(villageHasRedPostboxElements, 2000))
-    .then((villageHasRedPostboxElements) => {
-      villageHasRedPostboxElements.forEach((village) => {
-        const villageArea = getElementByClassName(village, "village-area");
-        villageArea.style.borderColor = "red";
-      });
-    });
+    .then((villageHasRedPostboxElements) => changeVillageAreaColor(villageHasRedPostboxElements, "red"));
 });
 
 export { redPostboxButton };
