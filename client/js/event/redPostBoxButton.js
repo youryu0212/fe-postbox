@@ -12,9 +12,13 @@ const renderRedPostboxInfo = (villageHasRedPostboxElements) => {
     return { name: getVillageName(villageElement), postboxSize: getRedPostboxSize(villageElement) };
   });
   const redPostboxInfo = getElementByClassName(document, "red-postbox__info");
-
+  if (villagesHasRedPostbox.length === 0) {
+    redPostboxInfo.innerHTML = `<div>빨간 우체통을 가진 마을이 없습니다 🤪</div>`;
+    return;
+  }
   redPostboxInfo.innerHTML = `
   <div>
+  빨간 우체통을 가진 마을은
     ${villagesHasRedPostbox.map((village) => village.name)} 총 ${
     villagesHasRedPostbox.length
   } 개의 마을입니다.
