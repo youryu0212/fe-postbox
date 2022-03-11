@@ -1,7 +1,8 @@
 import { redPostboxButton } from "./event/redPostBoxButton.js";
-import { createVillagePosition } from "./postbox.js";
+import { createVillagePosition } from "./createVillagePosition.js";
 import { getRandomNumber, gacha } from "./util.js";
 import { Village } from "./village.js";
+import { getElementByClassName } from "./dom-api/index.js";
 
 const positionToVillage = (pos) => new Village(String.fromCharCode(nameCode++), pos, gacha(50));
 
@@ -12,4 +13,10 @@ villages.forEach((village) => {
   village.innerVillage = createVillagePosition(village.w, village.h).map(positionToVillage);
 });
 
-document.querySelector(".map").innerHTML = villages.map((village) => village.createTemplate()).join("");
+getElementByClassName(document, "map").innerHTML = villages
+  .map((village) => village.createTemplate())
+  .join("");
+
+fetch("/data").then((res) => {
+  console.log(res.json);
+});
