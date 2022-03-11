@@ -1,4 +1,3 @@
-import { redPostboxButton } from "./event/redPostBoxButton.js";
 import { getElementByClassName } from "./dom-api/index.js";
 
 fetch("/data")
