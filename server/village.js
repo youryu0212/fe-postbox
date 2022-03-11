@@ -1,6 +1,6 @@
-import { getRandomNumber } from "./util.js";
+const { getRandomNumber } = require("./util.js");
 
-export class Village {
+class Village {
   constructor(name, { x, y, w, h }, hasPostbox = false) {
     this.name = name;
     [this.x, this.y, this.w, this.h] = [x, y, w, h];
@@ -29,3 +29,5 @@ export class Village {
     `;
   }
 }
+
+module.exports = { Village };

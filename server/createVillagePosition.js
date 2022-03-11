@@ -1,11 +1,11 @@
-import { getRandomNumber, toInt } from "./util.js";
+const { getRandomNumber, toInt } = require("./util.js");
 
 const OFFSET = 31;
 const MAX_TRY_COUNT = 20;
 const MIN_VILLAGE_COUNT = 1;
 const MAX_VILLAGE_COUNT = 6;
 
-export const createVillagePosition = (width, height) => {
+const createVillagePosition = (width, height) => {
   const result = [];
   const visited = Array.from(Array(height + 1), () => new Array(width + 1).fill(false));
   const visitVillagePosition = ({ x, y, w, h }) => {
@@ -41,3 +41,5 @@ export const createVillagePosition = (width, height) => {
   }
   return result;
 };
+
+module.exports = { createVillagePosition };
