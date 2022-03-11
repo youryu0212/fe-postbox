@@ -1,9 +1,11 @@
 const { getRandomNumber, toInt } = require("./util.js");
 
 const OFFSET = 31;
-const MAX_TRY_COUNT = 20;
+const MAX_TRY_COUNT = 100;
 const MIN_VILLAGE_COUNT = 1;
 const MAX_VILLAGE_COUNT = 6;
+const MIN_LENGTH_RATIO = 0.25;
+const MAX_LENGTH_RATIO = 0.5;
 
 const createVillagePosition = (width, height) => {
   const result = [];
@@ -16,10 +18,13 @@ const createVillagePosition = (width, height) => {
     }
   };
   const getPosition = () => {
-    const x = getRandomNumber(OFFSET, toInt(width / 1.2));
-    const y = getRandomNumber(OFFSET, toInt(height / 1.2));
-    const w = getRandomNumber(Math.max(10, toInt(width / 4)), toInt(width / 2));
-    const h = getRandomNumber(Math.max(10, toInt(height / 4)), toInt(height / 2));
+    const x = getRandomNumber(OFFSET, width);
+    const y = getRandomNumber(OFFSET, height);
+    const w = getRandomNumber(Math.max(10, toInt(width * MIN_LENGTH_RATIO)), toInt(width * MAX_LENGTH_RATIO));
+    const h = getRandomNumber(
+      Math.max(10, toInt(height * MIN_LENGTH_RATIO)),
+      toInt(height * MAX_LENGTH_RATIO)
+    );
     if (x + w + OFFSET >= width || y + h + OFFSET >= height) return;
     for (let i = y; i < y + h; i++) {
       for (let j = x; j < x + w; j++) {
