@@ -6,6 +6,7 @@ const MIN_VILLAGE_COUNT = 1;
 const MAX_VILLAGE_COUNT = 6;
 const MIN_LENGTH_RATIO = 0.25;
 const MAX_LENGTH_RATIO = 0.5;
+const MIN_LENGTH = 50;
 
 const createVillagePosition = (width, height) => {
   const result = [];
@@ -20,9 +21,12 @@ const createVillagePosition = (width, height) => {
   const getPosition = () => {
     const x = getRandomNumber(OFFSET, width);
     const y = getRandomNumber(OFFSET, height);
-    const w = getRandomNumber(Math.max(10, toInt(width * MIN_LENGTH_RATIO)), toInt(width * MAX_LENGTH_RATIO));
+    const w = getRandomNumber(
+      Math.max(MIN_LENGTH, toInt(width * MIN_LENGTH_RATIO)),
+      toInt(width * MAX_LENGTH_RATIO)
+    );
     const h = getRandomNumber(
-      Math.max(10, toInt(height * MIN_LENGTH_RATIO)),
+      Math.max(MIN_LENGTH, toInt(height * MIN_LENGTH_RATIO)),
       toInt(height * MAX_LENGTH_RATIO)
     );
     if (x + w + OFFSET >= width || y + h + OFFSET >= height) return;
@@ -36,7 +40,7 @@ const createVillagePosition = (width, height) => {
   };
   let villageCount = 0;
   let tryCount = 0;
-  while (villageCount < MIN_VILLAGE_COUNT || (villageCount < MAX_VILLAGE_COUNT && tryCount < MAX_TRY_COUNT)) {
+  while (villageCount < MAX_VILLAGE_COUNT && tryCount < MAX_TRY_COUNT) {
     const villagePosition = getPosition();
     if (villagePosition) {
       result.push(villagePosition);
