@@ -39,13 +39,10 @@ const changeVillageAreaColor = (villageElements, color) => {
 };
 
 redPostboxButton.addEventListener("click", () => {
-  new Promise((resolve, reject) => {
-    const villageHasRedPostboxElements = searchVillagesRedPostbox();
-    renderRedPostboxInfo(villageHasRedPostboxElements);
-    resolve(villageHasRedPostboxElements);
-  })
-    .then((villageHasRedPostboxElements) => delay(villageHasRedPostboxElements, 2000))
-    .then((villageHasRedPostboxElements) => changeVillageAreaColor(villageHasRedPostboxElements, "red"));
+  const villageHasRedPostboxElements = searchVillagesRedPostbox();
+  renderRedPostboxInfo(villageHasRedPostboxElements);
+  delay(villageHasRedPostboxElements, 2000).then((villageHasRedPostboxElements) =>
+    changeVillageAreaColor(villageHasRedPostboxElements, "red")
+  );
 });
-
 export { redPostboxButton };
